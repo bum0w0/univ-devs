@@ -1,1 +1,10 @@
 rootProject.name = 'backend_study'
+include 'univ-domain'
+include 'univ-api'
+include 'univ-security'
+include 'univ-oauth'
+include 'univ-events'
+include 'univ-cache'
+include 'univ-external'
+include 'univ-media'
+

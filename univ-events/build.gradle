@@ -1,0 +1,15 @@
+plugins {
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+    id 'java'
+}
+
+dependencies {
+    implementation project(':univ-domain')
+
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.springframework.boot:spring-boot-starter-messaging'
+}
+
+bootJar { enabled = false }
+jar { enabled = true }
