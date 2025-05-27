@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>1:1 채팅 테스트</title>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+</head>
+<body>
+<h2>1:1 WebSocket 채팅</h2>
+
+<label>닉네임: </label>
+<input type="text" id="sender" placeholder="ex. user1" />
+<br><br>
+<label>채팅방 ID: </label>
+<input type="text" id="roomId" placeholder="ex. 123" />
+<button onclick="connect()">접속</button>
+
+<div id="chatArea" style="display:none;">
+    <hr />
+    <div id="chatBox" style="height:200px; overflow-y:scroll; border:1px solid #ccc; padding:10px;"></div>
+    <br />
+    <input type="text" id="messageInput" placeholder="메시지를 입력하세요" />
+    <button onclick="sendMessage()">전송</button>
+</div>
+
+<script>
+    let stompClient = null;
+    let currentRoom = "";
+
+    function connect() {
+        const roomId = document.getElementById("roomId").value.trim();
+        const socket = new SockJS("/ws");
+        stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, () => {
+            currentRoom = roomId;
+            stompClient.subscribe(`/topic/room/${roomId}`, (msg) => {
+                const message = JSON.parse(msg.body);
+                const chatBox = document.getElementById("chatBox");
+                const newMsg = document.createElement("div");
+                newMsg.innerText = `[${message.sender}] ${message.content}`;
+                chatBox.appendChild(newMsg);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            });
+
+            document.getElementById("chatArea").style.display = "block";
+
+            // 여기서 Enter 키 이벤트 등록
+            document.getElementById("messageInput").addEventListener("keydown", (event) => {
+                if (event.key === "Enter") {
+                    sendMessage();
+                }
+            });
+        });
+    }
+
+    function sendMessage() {
+        const sender = document.getElementById("sender").value.trim();
+        const content = document.getElementById("messageInput").value.trim();
+
+        if (!sender || !content) return;
+
+        stompClient.send(`/app/room/${currentRoom}`, {}, JSON.stringify({
+            sender,
+            content
+        }));
+
+        document.getElementById("messageInput").value = "";
+    }
+</script>
+</body>
+</html>
