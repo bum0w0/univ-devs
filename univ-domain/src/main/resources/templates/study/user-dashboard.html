@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>유저 대시보드</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f7fc;
+            padding: 2rem;
+        }
+
+        .dashboard {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            color: #1565c0;
+            margin-bottom: 1.5rem;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logout-button {
+            margin-top: 1.5rem;
+            padding: 0.7rem 1.5rem;
+            background-color: #c62828;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .logout-button:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+    <h1 th:text="'안녕하세요, ' + ${session.user.nickname} + '님! 🎉'">안녕하세요!</h1>
+    <p>현재 참여 중인 스터디 목록:</p>
+    <ul>
+        <li>백엔드 스터디</li>
+        <li>알고리즘 문제풀이 그룹</li>
+        <li>UX/UI 디자인 협업</li>
+    </ul>
+    <form action="/logout" method="post">
+        <button type="submit" class="logout-button">로그아웃</button>
+    </form>
+</div>
+</body>
+</html>

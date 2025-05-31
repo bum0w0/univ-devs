@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>관리자 대시보드</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f7fc;
+            padding: 2rem;
+        }
+
+        .dashboard {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            color: #c62828;
+            margin-bottom: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 0.75rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #ef5350;
+            color: white;
+        }
+
+        .logout-button {
+            margin-top: 1.5rem;
+            padding: 0.7rem 1.5rem;
+            background-color: #c62828;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .logout-button:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard">
+    <h1 th:text="'관리자 ' + ${session.user.nickname} + '님 대시보드 👑'">관리자님 환영합니다</h1>
+    <p>부원 출석 통계</p>
+    <table>
+        <thead>
+        <tr>
+            <th>닉네임</th>
+            <th>총 출석일</th>
+            <th>지각 횟수</th>
+            <th>결석 횟수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>홍길동</td>
+            <td>12일</td>
+            <td>2회</td>
+            <td>0회</td>
+        </tr>
+        <tr>
+            <td>김철수</td>
+            <td>10일</td>
+            <td>0회</td>
+            <td>1회</td>
+        </tr>
+        </tbody>
+    </table>
+    <form action="/logout" method="post">
+        <button type="submit" class="logout-button">로그아웃</button>
+    </form>
+</div>
+</body>
+</html>
