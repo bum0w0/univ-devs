@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>회원가입 완료</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .box {
+            background: white;
+            padding: 2.5rem 3rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            max-width: 400px;
+        }
+        h1 {
+            color: #1565c0;
+            margin-bottom: 1rem;
+        }
+        p {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .login-button {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.7rem 1.5rem;
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .login-button:hover {
+            background-color: #0d47a1;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h1 th:text="'환영합니다, ' + ${nickname} + '님!'">환영합니다!</h1>
+    <p>🎉 유니브 스터디에 오신 것을 진심으로 환영합니다!</p>
+    <p>지금 바로 스터디를 시작해보세요.</p>
+    <a href="/login" class="login-button">로그인하러 가기</a>
+</div>
+</body>
+</html>
