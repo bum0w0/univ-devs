@@ -65,6 +65,28 @@
             background-color: #0d47a1;
         }
 
+        .social-login {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .social-login a {
+            display: inline-block;
+            margin: 0.5rem;
+            padding: 0.7rem 1.5rem;
+            background-color: #f4f4f4;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .social-login a:hover {
+            background-color: #e0e0e0;
+        }
+
         .switch-link {
             text-align: center;
             margin-top: 1rem;
@@ -90,6 +112,13 @@
         </label>
         <button type="submit">로그인</button>
     </form>
+
+    <div class="social-login">
+        <p>소셜 계정으로 로그인:</p>
+        <a href="/oauth2/authorization/google">Google</a>
+        <a href="/oauth2/authorization/kakao">Kakao</a>
+        <a href="/oauth2/authorization/naver">Naver</a>
+    </div>
 
     <div class="switch-link">
         계정이 없으신가요?
