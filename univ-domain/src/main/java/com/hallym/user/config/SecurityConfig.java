@@ -19,7 +19,7 @@ public class SecurityConfig {
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/login")  // 커스텀 로그인 페이지
-                        .defaultSuccessUrl("/")  // 성공 후 리디렉션
+                        .defaultSuccessUrl("/welcome", true)     // 성공 후 리디렉션
                 );
 
         return http.build();
