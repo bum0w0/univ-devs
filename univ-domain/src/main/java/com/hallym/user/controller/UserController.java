@@ -4,6 +4,7 @@ import com.hallym.user.model.Role;
 import com.hallym.user.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -77,6 +78,29 @@ public class UserController {
     public String logoutPost(HttpSession session) {
         session.invalidate();
         return "redirect:/login";
+    }
+
+    @GetMapping("/welcome")
+    public String welcomePage(Model model,
+                              @SessionAttribute(value = "user", required = false) Object sessionUser,
+                              @AuthenticationPrincipal org.springframework.security.oauth2.core.user.OAuth2User oauthUser) {
+
+        if (sessionUser != null) {
+            // 일반 로그인 사용자 (세션 기반)
+            model.addAttribute("userType", "session");
+            model.addAttribute("email", ((com.hallym.user.entity.User) sessionUser).getEmail());
+            model.addAttribute("nickname", ((com.hallym.user.entity.User) sessionUser).getNickname());
+        } else if (oauthUser != null) {
+            // 소셜 로그인 사용자 (Spring Security 기반)
+            model.addAttribute("userType", "oauth");
+            model.addAttribute("email", oauthUser.getAttribute("email"));
+            model.addAttribute("nickname", oauthUser.getAttribute("name"));
+        } else {
+            // 로그인 안 된 상태 → 로그인 페이지로 리다이렉트
+            return "redirect:/login";
+        }
+
+        return "welcome"; // templates/welcome.html 렌더링
     }
 
 }
