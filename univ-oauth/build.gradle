@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-    implementation project(':univ-security')
+    implementation project(':univ-domain')
 
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'org.springframework.boot:spring-boot-starter-web'

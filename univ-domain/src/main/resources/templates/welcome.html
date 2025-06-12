@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>회원가입 완료</title>
+    <title>환영합니다</title>
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -12,6 +12,7 @@
             height: 100vh;
             margin: 0;
         }
+
         .box {
             background: white;
             padding: 2.5rem 3rem;
@@ -20,15 +21,18 @@
             text-align: center;
             max-width: 400px;
         }
+
         h1 {
             color: #1565c0;
             margin-bottom: 1rem;
         }
+
         p {
             color: #555;
             font-size: 1.1rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
+
         .login-button {
             display: inline-block;
             margin-top: 1rem;
@@ -41,6 +45,7 @@
             text-decoration: none;
             transition: 0.3s;
         }
+
         .login-button:hover {
             background-color: #0d47a1;
         }
@@ -49,9 +54,13 @@
 <body>
 <div class="box">
     <h1 th:text="'환영합니다, ' + ${nickname} + '님!'">환영합니다!</h1>
-    <p>🎉 유니브 스터디에 오신 것을 진심으로 환영합니다!</p>
-    <p>지금 바로 스터디를 시작해보세요.</p>
-    <a href="/login" class="login-button">로그인하러 가기</a>
+
+    <p th:if="${userType} == 'session'">일반 로그인 사용자로 로그인되었습니다.</p>
+    <p th:if="${userType} == 'oauth'">소셜 로그인 사용자로 로그인되었습니다.</p>
+
+    <p th:text="'이메일: ' + ${email}">이메일 표시</p>
+
+    <a href="/logout" class="login-button">로그아웃</a>
 </div>
 </body>
 </html>
